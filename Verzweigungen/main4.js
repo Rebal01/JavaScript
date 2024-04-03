@@ -28,7 +28,7 @@ async function execute() {
             console.log(`Today is Sunday ${user}`);
             break;
         default:
-            console.log(`This is not a day of the week, you idiot ${user}`);
+            console.log(`This is not a day of the week, ${user}`);
             break;
     }
 }

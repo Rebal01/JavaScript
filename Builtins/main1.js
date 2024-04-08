@@ -1,2 +1,2 @@
-const date = Date(2024);
-console.log(date);
+const date = new Date();
+console.log(date.toDateString());

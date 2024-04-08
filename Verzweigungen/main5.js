@@ -35,6 +35,7 @@ async function execute() {
         case 'o':
         case 'i':
             console.log(`That's right, It's a vowel letter. Good job, boy, ${user}`);
+            break;
 
         default:
             console.log(`This is not a letter, ${user},. You must learn the letters`);

@@ -1,8 +1,8 @@
-const favoriteCar ={
-    name : "Viper",
-    Model : "D464S",
-    color : "red",
-    Used : false,
-    CarPlate : 465324, 
+const favoriteCar = {
+    name: "Viper",
+    Model: "D464S",
+    color: "red",
+    used: false,
+    carPlate: 465324,
 };
-console.table(favoriteCar);
+console.log(`Name: ${favoriteCar.name} Model: ${favoriteCar.Model}  Color: ${favoriteCar.color} Used: ${favoriteCar.used} CarPlate: ${favoriteCar.carPlate}`);

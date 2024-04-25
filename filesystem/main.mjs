@@ -1,4 +1,5 @@
 import { readFile, writeFile } from 'node:fs';
+import fs from 'fs'
 import readline from 'readline';
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 const prompt = (query) => new Promise((resolve) => rl.question(query, resolve));
@@ -7,9 +8,9 @@ const productData = [];
 async function start() {
     const menu = await prompt('Enter "a" to add data, "f" to find data, or "x" to save and exit:');
     typeof menu === 'string'
-    if (menu == 'a') { return await addData(); }
-    if (menu == 'f') { return await findData(); }
-    if (menu == 'x') { return await saveAndExit(); }
+    if (menu == 'a') { await addData(); }
+    else if (menu == 'f') { await findData(); }
+    else if (menu == 'x') { await saveAndExit(); }
     else {
         console.log('Invalid input. Please enter "a", "f", or "x".');
         await start();
@@ -43,16 +44,25 @@ async function findData() {
     }
     await start();
 }
-function saveAndExit() {
-    const dataToWrite = JSON.stringify(jsonData, null, 2);
+async function saveAndExit() {
     const jsonFile = 'data.json';
-    writeFile(jsonFile, dataToWrite, 'utf8', (err) => {
-        if (err) {
-            console.error('Error writing file');
-        } else {
-            console.log('File saved successfully!');
-        }
-    });
+    const dataToWrite = JSON.stringify(productData, null, 2);
+    try {
+        fs.writeFileSync(jsonFile, dataToWrite, 'utf8');
+        console.log('File saved successfully!');
+    } catch (err) {
+        console.error('Error writing file:', err);
+    }
 }
+// async function saveAndExit() {
+//     const jsonFile = 'data.json';
+//     const dataToWrite = JSON.stringify(productData, null, 2);
+//     try {
+//         await writeFile(jsonFile, dataToWrite, 'utf8');
+//         console.log('File saved successfully!');
+//     } catch (err) {
+//         console.error('Error writing file');
+//     }
+// }
 
 start().catch((err) => { console.error(err); }).finally(() => rl.close());
